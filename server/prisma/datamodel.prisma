@@ -1,0 +1,55 @@
+enum UWC {
+  PEARSON
+  ATLANTIC
+}
+enum GENDER {
+  MALE
+  FEMALE
+}
+
+type User {
+  id: ID! @id
+  email: String! @unique
+  firstName: String
+  lastName: String
+  password: String
+  gender: GENDER
+  nationality: String
+  description: String
+  phoneNumber: String
+  facebookUrl: String
+  twitterUrl: String
+  linkedinUrl: String
+  isVerified: Boolean @default(value: false)
+  isAdmin: Boolean @default(value: false)
+  uwcName: UWC
+  question1: String
+  question2: String
+  question3: String
+  places: [Place]
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+# https://github.com/okgrow/graphql-scalars for unique email addresses
+
+type Place {
+  id: ID! @id
+  title: String!
+  description: String
+  latitude: String!
+  longitude: String!
+  city: String
+  state: String
+  country: String
+  street: String
+  nearbyDescription: String
+  accomodationDescription: String
+  bedrooms: String
+  bathrooms: String
+  expirationDate: String
+  numGuests: String
+  ownedBy: User!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}

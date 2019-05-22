@@ -1,0 +1,84 @@
+type Query {
+  places: [Place!]!
+  place(placeId: ID!): Place
+  users: [User!]!
+  user(userId: ID!): User
+  placesByUser(ownedBy: ID!): [Place!]!
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type Mutation {
+  createNewUser(email: String!, firstName: String, lastName: String!): User
+  # updateUser(id: ID!): User
+  deleteUserById(id: ID!): User
+  createNewPlace(
+    title: String!
+    latitude: String!
+    longitude: String!
+    ownedBy: ID!
+  ): Place
+  # updatePlace(id: ID!): Place
+  signup(
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    nationality: String!
+    isVerified: Boolean
+    isAdmin: Boolean
+  ): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+enum UWC {
+  PEARSON
+  ATLANTIC
+}
+enum GENDER {
+  MALE
+  FEMALE
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String
+  lastName: String
+  gender: GENDER
+  nationality: String
+  description: String
+  phoneNumber: String
+  facebookUrl: String
+  twitterUrl: String
+  linkedinUrl: String
+  isVerified: Boolean
+  isAdmin: Boolean
+  uwcName: UWC
+  question1: String
+  question2: String
+  question3: String
+  places: [Place]
+}
+
+type Place {
+  id: ID!
+  title: String!
+  description: String
+  latitude: String!
+  longitude: String!
+  city: String
+  state: String
+  country: String
+  street: String
+  nearbyDescription: String
+  accomodationDescription: String
+  bedrooms: String
+  bathrooms: String
+  expirationDate: String
+  numGuests: String
+  ownedBy: User!
+}
